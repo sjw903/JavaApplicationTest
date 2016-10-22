@@ -1,4 +1,4 @@
-package com.jtpay.javaapplication;
+package com.sun.test;
 
 import org.junit.Test;
 

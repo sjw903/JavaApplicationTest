@@ -1,4 +1,4 @@
-package com.jtpay.javaapplication;
+package com.sun.test;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

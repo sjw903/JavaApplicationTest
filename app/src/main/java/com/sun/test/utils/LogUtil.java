@@ -1,4 +1,4 @@
-package com.jtpay.javaapplication.util;
+package com.sun.test.utils;
 
 import android.util.Log;
 

@@ -1,9 +1,9 @@
-package com.jtpay.javaapplication.app;
+package com.sun.test.app;
 
 import android.app.Application;
 
-import com.jtpay.javaapplication.util.ContextUtil;
-import com.jtpay.javaapplication.util.ExceptionHandler;
+import com.sun.test.utils.ContextUtil;
+import com.sun.test.utils.ExceptionHandler;
 
 /**
  * Created by Steven on 2016/8/8 0008.

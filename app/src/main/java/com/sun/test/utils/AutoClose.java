@@ -1,4 +1,4 @@
-package com.jtpay.javaapplication.util;
+package com.sun.test.utils;
 
 import java.io.Closeable;
 import java.io.IOException;

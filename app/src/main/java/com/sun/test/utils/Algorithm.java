@@ -1,7 +1,10 @@
-package com.jtpay.javaapplication.util;
+package com.sun.test.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -66,51 +69,94 @@ public class Algorithm {
      * remove the repeated number in the array
      */
     public <T> void removeRepeatedNumber(T[] array) {
+        //LinkedHashSet keep origin order
+        //TreeSet from small to big
+
         Set<T> set = new HashSet<T>();
         for (T t : array) {
             set.add(t);
         }
         LogUtil.log("removeRepeatedNumber after : ");
         LogUtil.log(" array value is ");
-
         for (T t : set) {
             LogUtil.log("   " + t);
         }
+
     }
 
     public void removeRepeatedNumber(int[] intArrays) {
-        Set<Integer> set = new HashSet();
+        Set<Integer> set = new LinkedHashSet<>();
         for (int i : intArrays) {
             set.add(i);
         }
         LogUtil.log("removeRepeatedNumber after : ");
         LogUtil.log(" array value is ");
+        Integer[] integers = (Integer[]) set.toArray();
+        for (int i : integers) {
+            LogUtil.log("   " + i);
+
+        }
+        LogUtil.log("set array");
         for (int i : set) {
             LogUtil.log("   " + i);
         }
     }
+    public <T> void findSecondLargerNumber(T[] intArrays) {
+        if (null == intArrays || 0 == intArrays.length) {
+            throw new IllegalArgumentException("argument is null or argument length is 0 ");
+        }
+        Arrays.sort(intArrays);
+        T max;
+        int len = intArrays.length;
 
+        max = intArrays[len - 1];
+        boolean findSecondMax = false;
+        for (int i = len - 1; i >= 0; i--) {
+            T num = intArrays[i];
+            if (!num.equals(max)) {
+                max = num;
+                findSecondMax = true;
+                break;
+            }
+        }
+        if (findSecondMax) {
+            LogUtil.log("findSecondLargerNumber find second max number is " + max);
+        } else {
+            LogUtil.log("findSecondLargerNumber not  find second max number");
+        }
+    }
     public void findSecondLargerNumber(int[] intArrays) {
         if (null == intArrays || 0 == intArrays.length) {
             throw new IllegalArgumentException("argument is null or argument length is 0 ");
         }
         Arrays.sort(intArrays);
-        int max, secondMax;
-        max = secondMax = intArrays[0];
+        int max;
+        int len = intArrays.length;
+
+        max = intArrays[len - 1];
         boolean findSecondMax = false;
-        for (int i : intArrays) {
-            if (max < i) {
-                secondMax = max;
-                if (!findSecondMax) {
-                    findSecondMax = true;
-                }
-                max = i;
+        for (int i = len - 1; i >= 0; i--) {
+            int num = intArrays[i];
+            if (num < max) {
+                max = num;
+                findSecondMax = true;
+                break;
             }
         }
         if (findSecondMax) {
-            LogUtil.log("findSecondLargerNumber find second max number is " + secondMax);
+            LogUtil.log("findSecondLargerNumber find second max number is " + max);
         } else {
             LogUtil.log("findSecondLargerNumber not  find second max number");
         }
+    }
+
+    public void arrayListLengthTest() {
+        List list = new ArrayList();
+        int len = list.size();
+        LogUtil.log("arrayListLenghtTest len = " + len);
+    }
+
+    public void createDir() {
+
     }
 }
