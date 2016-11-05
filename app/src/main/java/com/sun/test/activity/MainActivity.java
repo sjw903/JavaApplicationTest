@@ -8,6 +8,7 @@ import android.text.format.DateUtils;
 import android.widget.Button;
 
 import com.sun.test.R;
+import com.sun.test.java.CollectionTest;
 import com.sun.test.utils.Algorithm;
 import com.sun.test.utils.LogUtil;
 import com.sun.test.utils.ReflectTest;
@@ -15,6 +16,7 @@ import com.sun.test.utils.ReflectTest;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +43,22 @@ public class MainActivity extends AppCompatActivity {
 //                for (int i = 0; i < 2; i++) {
 //                    simpleTest(i);
 //                }
+                javaTest();
             }).start();
         });
+    }
+
+    private void javaTest() {
+        collectionTest();
+    }
+
+    private void collectionTest() {
+        List<String> list = Arrays.asList(new String[]{"one", "two", "three", "four", "five"});
+        CollectionTest.getInstance().listReverse(list);
+        for (String str : list) {
+            System.out.print(" " + str);
+        }
+        System.out.println();
     }
 
     private void reflectTest() {
@@ -94,12 +110,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void algorithmTest() {
-        int[] intArrays = {3, 3, 3, 3, 3, 3, 2323, -1};
-        int[] intArrays2 = {2, 35, 5, 4, 1, 2};
+        int[] intArrays = {5, 3, 3, 3, 3, 3, 2323, -1};
+        int[] intArrays2 = {8, 4, 1, 3};
         int[] intArrays3 = {3, 3, 3, 3, 3, 3};
         Algorithm algorithm = new Algorithm();
         int result = 'i' + 't';
         LogUtil.log("result = " + result);
+        algorithm.findSecond(intArrays);
+        algorithm.findSecond(intArrays2);
+        algorithm.findSecond(intArrays3);
 //        algorithm.switchTest();
 //        algorithm.percent();
 //        algorithm.arrayListLengthTest();
@@ -133,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
             System.out.print(i + " ");
         }
         System.out.println();
-        algorithm.removeRepeatedNumber(intArrays);
-        algorithm.removeRepeatedNumber(intArrays2);
-        algorithm.removeRepeatedNumber(intArrays3);
+//        algorithm.removeRepeatedNumber(intArrays);
+//        algorithm.removeRepeatedNumber(intArrays2);
+//        algorithm.removeRepeatedNumber(intArrays3);
 
     }
 

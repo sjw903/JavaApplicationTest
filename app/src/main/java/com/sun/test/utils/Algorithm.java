@@ -101,6 +101,7 @@ public class Algorithm {
             LogUtil.log("   " + i);
         }
     }
+
     public <T> void findSecondLargerNumber(T[] intArrays) {
         if (null == intArrays || 0 == intArrays.length) {
             throw new IllegalArgumentException("argument is null or argument length is 0 ");
@@ -125,6 +126,7 @@ public class Algorithm {
             LogUtil.log("findSecondLargerNumber not  find second max number");
         }
     }
+
     public void findSecondLargerNumber(int[] intArrays) {
         if (null == intArrays || 0 == intArrays.length) {
             throw new IllegalArgumentException("argument is null or argument length is 0 ");
@@ -153,10 +155,38 @@ public class Algorithm {
     public void arrayListLengthTest() {
         List list = new ArrayList();
         int len = list.size();
-        LogUtil.log("arrayListLenghtTest len = " + len);
+        LogUtil.log("arrayListLengthTest len = " + len);
     }
 
     public void createDir() {
 
+    }
+
+    public void findSecond(int[] intArrays) {
+        if (null == intArrays || 0 == intArrays.length) {
+            throw new IllegalArgumentException("argument is null or argument length is 0 ");
+        }
+        int max, secondMax;
+        max = intArrays[0];
+        secondMax = Integer.MIN_VALUE;
+        boolean find = false;
+        int len = intArrays.length;
+        for (int i = 0; i < len; i++) {
+            if (intArrays[i] > max) {
+                secondMax = max;
+                max = intArrays[i];
+                find = true;
+            } else if (intArrays[i] > secondMax) {
+                if (max > intArrays[i]) {
+                    secondMax = intArrays[i];
+                    find = true;
+                }
+            }
+        }
+        if (find) {
+            LogUtil.log("secondMax =  " + secondMax);
+        } else {
+            LogUtil.log("not findSecondMax!!!");
+        }
     }
 }
