@@ -189,4 +189,18 @@ public class Algorithm {
             LogUtil.log("not findSecondMax!!!");
         }
     }
+
+    public void test() {
+        int j = 0;
+        for (int i = 0; ; i++) {
+            if (i % 2 == 1 && i % 3 == 0 && i % 4 == 1 && i % 5 == 4 && i % 6 == 3 && i % 7 == 5 && i % 8 == 1 && i % 9 == 0) {
+                System.out.println("i = " + i);
+                j++;
+                if (j == 5) {
+                    break;
+                }
+            }
+        }
+        System.out.print("out!");
+    }
 }

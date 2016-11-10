@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.print(i + " ");
         }
         System.out.println();
+        algorithm.test();
 //        algorithm.removeRepeatedNumber(intArrays);
 //        algorithm.removeRepeatedNumber(intArrays2);
 //        algorithm.removeRepeatedNumber(intArrays3);
