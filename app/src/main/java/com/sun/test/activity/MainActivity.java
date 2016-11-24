@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.sun.test.R;
 import com.sun.test.java.CollectionTest;
+import com.sun.test.java.ExceptionTest;
 import com.sun.test.utils.Algorithm;
 import com.sun.test.utils.LogUtil;
 import com.sun.test.utils.ReflectTest;
@@ -50,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void javaTest() {
         collectionTest();
+        exceptionTest();
+    }
+
+    private void exceptionTest() {
+        ExceptionTest test = new ExceptionTest();
+        test.exception();
     }
 
     private void collectionTest() {
