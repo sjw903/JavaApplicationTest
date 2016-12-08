@@ -1,10 +1,12 @@
 package com.sun.test.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.widget.Button;
 
 import com.sun.test.R;
@@ -47,6 +49,31 @@ public class MainActivity extends AppCompatActivity {
                 javaTest();
             }).start();
         });
+        Button button1 = (Button) findViewById(R.id.btn_test);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                openApk();
+                Algorithm algorithm = new Algorithm();
+//                algorithm.testNumber();
+                algorithm.calculateCoordinate();
+            }
+        });
+    }
+
+    private static final String TOKEN_ID = "token_id";
+    private static final String APPID = "appid";
+    private static final String PLUGIN = "android.intent.action.PAY_PLUGIN";
+
+    // 打开Apk
+    public void openApk() {
+        String tokenId = "cb9d364fab1c35a84db7de82ca2c559c";
+        String appId = "wx1d6775c7e499caa9";
+        Intent intent = new Intent(PLUGIN);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(TOKEN_ID, tokenId);
+        intent.putExtra(APPID, appId);
+        startActivity(intent);
     }
 
     private void javaTest() {

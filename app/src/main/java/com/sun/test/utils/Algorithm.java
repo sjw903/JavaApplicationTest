@@ -2,9 +2,13 @@ package com.sun.test.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -201,6 +205,121 @@ public class Algorithm {
                 }
             }
         }
-        System.out.print("out!");
+        System.out.println("out!");
+        randomNumber();
+    }
+
+    public void randomNumber() {
+        System.out.println("randomNumber!");
+        Random r = new Random();
+        int number;
+        for (int i = 0; i < 20; i++) {
+            number = r.nextInt();
+            System.out.print(" " + number);
+            if (0 == i % 10) {
+                System.out.println();
+            }
+        }
+        System.out.println();
+        for (int i = 0; i < 50; i++) {
+            number = r.nextInt(50);
+            System.out.print(" " + number);
+            if (0 == i % 10) {
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
+
+    public void printMap(HashMap map) {
+        Iterator iterator = map.keySet().iterator();
+        while (iterator.hasNext()) {
+            Object key = iterator.next();
+            Object value = map.get(key);
+            System.out.println("key %s: value %s" + key + value);
+
+        }
+        for (Object entry : map.entrySet()) {
+            Map.Entry mapEntry = (Map.Entry) entry;
+            System.out.println("key %s: value %s" + mapEntry.getKey() + mapEntry.getValue());
+        }
+    }
+
+    /**
+     * Algorithm
+     * Question:
+     * <p>
+     * 1    3   7   13  ...
+     * 5    9   15  ...
+     * 11   17  ...
+     * 19   ...
+     * ...
+     * <p>
+     * calculate the position of 2009
+     * <p>
+     * print out the result of coordinate
+     * Form :
+     * A(i,j) = i * i + j * j + i + 2 * i * j + 3 * j + 1
+     */
+
+    public void calculateCoordinate() {
+        int sum;
+        int m, n;
+        m = n = 0;
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 50; j++) {
+                sum = (int) Math.pow(i, 2) + (int) Math.pow(j, 2) + i + 2 * i * j + 3 * j + 1;
+                if (2009 == sum) {
+                    m = i;
+                    n = j;
+                    System.out.println("i = " + i + " j = " + j + " sum = " + sum);
+                    break;
+                }
+            }
+        }
+        System.out.println(" x = " + (m + 1) + " y = " + (n + 1));
+        int con = (int) Math.pow(n, 2) + 3 * n + 1;
+        for (int i = 0; i <= m; i++) {
+            sum = con + (int) Math.pow(i, 2) + i + 2 * i * n;
+            System.out.print(" " + sum);
+        }
+        System.out.println(String.format("m = %d, n = %d", m + 1, n + 1));
+        System.out.printf("m = %d, n = %d ", m + 1, n + 1);
+        System.out.println("end");
+    }
+
+    /**
+     * calculateCoordinate
+     * the wrong method above
+     */
+    public void testNumber() {
+        int sum = 0;
+        int m, n;
+        m = n = 0;
+        for (int i = 0; i < 44; i++) {
+            for (int j = 0; j < 44; j++) {
+                sum = i * i + i + j * j + 3 * j;
+                if (sum == 8) {
+                    m = i;
+                    n = j;
+                    i = i + 1;
+                    j = j + 1;
+                    LogUtil.log("i = " + i + " j = " + j + " sum = " + sum);
+                    break;
+                }
+            }
+        }
+        int begin = n * n + 3 * n + 1;
+        System.out.println("begin = " + begin);
+        int number;
+        for (int i = 0; i <= m; i++) {
+            number = (i + 1) * i + begin;
+            System.out.print(" " + number);
+            if (0 == (i + 1) % 10) {
+                System.out.println();
+            }
+        }
+        System.out.println();
+
     }
 }
