@@ -243,6 +243,11 @@ public class Algorithm {
             Map.Entry mapEntry = (Map.Entry) entry;
             System.out.println("key %s: value %s" + mapEntry.getKey() + mapEntry.getValue());
         }
+        Set<Map.Entry> set = map.entrySet();
+        for (Map.Entry entry : set) {
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+        }
     }
 
     /**

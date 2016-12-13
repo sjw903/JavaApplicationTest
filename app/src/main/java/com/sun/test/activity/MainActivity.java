@@ -1,13 +1,21 @@
 package com.sun.test.activity;
 
+import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.sun.test.R;
 import com.sun.test.java.CollectionTest;
@@ -53,12 +61,43 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                openApk();
-                Algorithm algorithm = new Algorithm();
-//                algorithm.testNumber();
-                algorithm.calculateCoordinate();
+                openWeChatScanUI();
             }
         });
+    }
+
+    private void openWeChatScanUI() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int checkOpenPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
+            if (checkOpenPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,"com.tencent.mm.permission.C2D_MESSAGE",
+                "com.tencent.mm.plugin.permission.READ","com.tencent.mm.plugin.permission.WRIT"
+                }, 0);
+            }
+        } else {
+            doOpenWeChatScanUI();
+        }
+    }
+
+    private void doOpenWeChatScanUI() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.tencent.mm", "com.tencent.mm.plugin.scanner.ui.BaseScanUI");
+        intent.setComponent(componentName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                doOpenWeChatScanUI();
+            } else {
+                Toast.makeText(this, "can have permission", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     private static final String TOKEN_ID = "token_id";
