@@ -21,6 +21,7 @@ import com.sun.test.R;
 import com.sun.test.java.CollectionTest;
 import com.sun.test.java.ExceptionTest;
 import com.sun.test.utils.Algorithm;
+import com.sun.test.utils.DesUtils;
 import com.sun.test.utils.LogUtil;
 import com.sun.test.utils.ReflectTest;
 
@@ -58,20 +59,37 @@ public class MainActivity extends AppCompatActivity {
             }).start();
         });
         Button button1 = (Button) findViewById(R.id.btn_test);
+//        Log.wtf();
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openWeChatScanUI();
+                desTest();
             }
         });
+    }
+
+    private void desTest() {
+        String content = "2342343243243";
+        String key = "66af8593f42b01b3ee815ad8be980e3c";
+        StringBuilder builder = new StringBuilder(content);
+        try {
+            for (int i = 0; i < 10; i++) {
+                builder.append(i);
+                String decryptContent = DesUtils.encode(key, builder.toString());
+                String plainText = DesUtils.decode(key, decryptContent);
+                LogUtil.log("decryptContent = " + decryptContent + " plainText = " + plainText + " content = " + builder.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void openWeChatScanUI() {
         if (Build.VERSION.SDK_INT >= 23) {
             int checkOpenPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
             if (checkOpenPermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,"com.tencent.mm.permission.C2D_MESSAGE",
-                "com.tencent.mm.plugin.permission.READ","com.tencent.mm.plugin.permission.WRIT"
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, "com.tencent.mm.permission.C2D_MESSAGE",
+                        "com.tencent.mm.plugin.permission.READ", "com.tencent.mm.plugin.permission.WRIT"
                 }, 0);
             }
         } else {
