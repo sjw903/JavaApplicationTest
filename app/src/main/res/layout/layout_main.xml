@@ -32,4 +32,18 @@
             android:textAllCaps="false"/>
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="test1"
+        android:text="Test1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="test2"
+        android:text="Test2"/>
+
 </LinearLayout>

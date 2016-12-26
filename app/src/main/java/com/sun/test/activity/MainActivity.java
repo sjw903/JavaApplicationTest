@@ -36,15 +36,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
+    private ComponentName mDefault;
+    private ComponentName mTest1;
+    private ComponentName mTest2;
+    private PackageManager mPackageManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
         initWidget();
+        initData();
+    }
+
+    private void initData() {
+        mDefault = getComponentName();
+        mTest1 = new ComponentName(getBaseContext(), "com.sun.test.activity.Test1");
+        mTest2 = new ComponentName(getBaseContext(), "com.sun.test.activity.Test2");
     }
 
     private void initWidget() {
+        mPackageManager = getApplicationContext().getPackageManager();
         Button button = (Button) findViewById(R.id.btn_algorithm);
         button.setOnClickListener(m -> {
             System.out.println("Lambda  m.getId() = " + m.getId());
@@ -66,6 +78,26 @@ public class MainActivity extends AppCompatActivity {
                 desTest();
             }
         });
+    }
+
+    public void test1(View view) {
+        disableComponet(mDefault);
+        disableComponet(mTest2);
+        enableComponet(mTest1);
+    }
+
+    public void test2(View view) {
+        disableComponet(mDefault);
+        disableComponet(mTest1);
+        enableComponet(mTest2);
+    }
+
+    private void enableComponet(ComponentName name) {
+        mPackageManager.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+    }
+
+    private void disableComponet(ComponentName name) {
+        mPackageManager.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
     private void desTest() {

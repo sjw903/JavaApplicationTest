@@ -160,6 +160,35 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".activity.Test1"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher2"
+            android:label="Test1"
+            android:targetActivity=".activity.MainActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".activity.Test2"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher2"
+            android:label="Test2"
+            android:targetActivity=".activity.MainActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>
