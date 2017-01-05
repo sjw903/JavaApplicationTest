@@ -1,5 +1,6 @@
 package com.sun.test.utils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -326,5 +327,44 @@ public class Algorithm {
         }
         System.out.println();
 
+    }
+
+    public void listTest() {
+        List<String> listStr = new ArrayList<>();
+        listStr.add("1");
+        listStr.add("2");
+        // wrong code
+//        for (String str : listStr) {
+//            if ("1".equals(str)) {
+//                listStr.remove(str);
+//            }
+//        }
+        System.out.println("Original:");
+        for (String str : listStr) {
+            System.out.print(" " + str);
+        }
+        System.out.println();
+
+        Iterator<String> iterator = listStr.iterator();
+        while (iterator.hasNext()) {
+            String str = iterator.next();
+            if ("1".equals(str)) {
+                iterator.remove();
+            }
+        }
+        System.out.println();
+        System.out.println("After:");
+        for (String str : listStr) {
+            System.out.print(" " + str);
+        }
+        System.out.println();
+        int remain = -3 % 2;
+        int mod = -3 / 2;
+        System.out.println(String.format("remain = %d, mod = %d", remain, mod));
+        double result = 2.00 - 1.10;
+        System.out.println("result = " + result);
+        System.out.println(new BigDecimal("2.00").subtract(new BigDecimal("1.10")));
+        result = Double.parseDouble(new BigDecimal("2.00").subtract(new BigDecimal("1.10")).toString());
+        System.out.println("result = " + result);
     }
 }

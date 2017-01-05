@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.shine.sun.babygrowdiary.service.IMyAidlService;
 import com.sun.test.R;
 import com.sun.test.java.CollectionTest;
 import com.sun.test.java.ExceptionTest;
@@ -40,6 +44,30 @@ public class MainActivity extends AppCompatActivity {
     private ComponentName mTest1;
     private ComponentName mTest2;
     private PackageManager mPackageManager;
+    private IMyAidlService mIMyAidlService;
+    private Button mAidlButton;
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mIMyAidlService = IMyAidlService.Stub.asInterface(service);
+            mAidlButton.setEnabled(true);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mAidlButton.setEnabled(false);
+        }
+    };
+
+    public void aidlClick(View view) {
+        Toast.makeText(this, "Aidl Success", Toast.LENGTH_SHORT).show();
+        try {
+            String packageName = mIMyAidlService.getPackageName();
+            LogUtil.log("aidlClick packageName = " + packageName);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +75,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.layout_main);
         initWidget();
         initData();
+        init();
+    }
+
+    private void init() {
+        Intent intent = new Intent("com.shine.sun.aidl.myservice");
+        intent.setPackage("com.shine.sun.babygrowdiary");
+        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void initData() {
@@ -67,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 //                for (int i = 0; i < 2; i++) {
 //                    simpleTest(i);
 //                }
-                javaTest();
+//                javaTest();
             }).start();
         });
         Button button1 = (Button) findViewById(R.id.btn_test);
@@ -78,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 desTest();
             }
         });
+        mAidlButton = (Button) findViewById(R.id.btn_aidl);
     }
 
     public void test1(View view) {
@@ -239,9 +275,10 @@ public class MainActivity extends AppCompatActivity {
         Algorithm algorithm = new Algorithm();
         int result = 'i' + 't';
         LogUtil.log("result = " + result);
-        algorithm.findSecond(intArrays);
-        algorithm.findSecond(intArrays2);
-        algorithm.findSecond(intArrays3);
+        algorithm.listTest();
+//        algorithm.findSecond(intArrays);
+//        algorithm.findSecond(intArrays2);
+//        algorithm.findSecond(intArrays3);
 //        algorithm.switchTest();
 //        algorithm.percent();
 //        algorithm.arrayListLengthTest();
@@ -257,25 +294,25 @@ public class MainActivity extends AppCompatActivity {
 //            LogUtil.log("finally ");
 //        }
 
-        System.out.println();
-        LogUtil.log("intArrays ");
-        for (int i : intArrays) {
-            System.out.print(i + " ");
-        }
-
-        System.out.println();
-        LogUtil.log("intArrays2 ");
-        for (int i : intArrays2) {
-            System.out.print(i + " ");
-        }
-
-        System.out.println();
-        LogUtil.log("intArrays3 ");
-        for (int i : intArrays3) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        algorithm.test();
+//        System.out.println();
+//        LogUtil.log("intArrays ");
+//        for (int i : intArrays) {
+//            System.out.print(i + " ");
+//        }
+//
+//        System.out.println();
+//        LogUtil.log("intArrays2 ");
+//        for (int i : intArrays2) {
+//            System.out.print(i + " ");
+//        }
+//
+//        System.out.println();
+//        LogUtil.log("intArrays3 ");
+//        for (int i : intArrays3) {
+//            System.out.print(i + " ");
+//        }
+//        System.out.println();
+//        algorithm.test();
 //        algorithm.removeRepeatedNumber(intArrays);
 //        algorithm.removeRepeatedNumber(intArrays2);
 //        algorithm.removeRepeatedNumber(intArrays3);

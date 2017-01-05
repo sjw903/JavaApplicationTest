@@ -46,4 +46,14 @@
         android:onClick="test2"
         android:text="Test2"/>
 
+    <Button
+        android:id="@+id/btn_aidl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="false"
+        android:onClick="aidlClick"
+        android:text="AidlButton"
+        android:textAllCaps="false"/>
+
 </LinearLayout>
