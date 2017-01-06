@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private PackageManager mPackageManager;
     private IMyAidlService mIMyAidlService;
     private Button mAidlButton;
+    private Button mTokenBtn;
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -114,6 +115,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAidlButton = (Button) findViewById(R.id.btn_aidl);
+        mTokenBtn = (Button) findViewById(R.id.btn_token);
+        mTokenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.pay.sdk.PAY");
+                intent.setPackage("com.pay.sdk");
+                intent.putExtra("token", "0123456789");
+                startActivity(intent);
+            }
+        });
     }
 
     public void test1(View view) {
