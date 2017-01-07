@@ -26,6 +26,7 @@ import com.sun.test.java.CollectionTest;
 import com.sun.test.java.ExceptionTest;
 import com.sun.test.utils.Algorithm;
 import com.sun.test.utils.DesUtils;
+import com.sun.test.utils.GenericPair;
 import com.sun.test.utils.LogUtil;
 import com.sun.test.utils.ReflectTest;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private IMyAidlService mIMyAidlService;
     private Button mAidlButton;
     private Button mTokenBtn;
+    private Button mPayBtn;
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -125,21 +127,40 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mPayBtn = (Button) findViewById(R.id.btn_pay);
+        mPayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                genericTest();
+            }
+        });
+    }
+
+    private void genericTest() {
+        List<String> list = new ArrayList<>();
+        list.add("listFirst");
+        GenericPair<String, List<String>> pair = new GenericPair<>("first", list);
+        System.out.println("genericTest");
+        System.out.println(pair);
+        list.add("second");
+        pair = GenericPair.create("second", list);
+        System.out.println("genericTest");
+        System.out.println(pair);
     }
 
     public void test1(View view) {
         disableComponet(mDefault);
         disableComponet(mTest2);
-        enableComponet(mTest1);
+        enableComponnent(mTest1);
     }
 
     public void test2(View view) {
         disableComponet(mDefault);
         disableComponet(mTest1);
-        enableComponet(mTest2);
+        enableComponnent(mTest2);
     }
 
-    private void enableComponet(ComponentName name) {
+    private void enableComponnent(ComponentName name) {
         mPackageManager.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
     }
 

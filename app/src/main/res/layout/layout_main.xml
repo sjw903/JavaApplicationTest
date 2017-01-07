@@ -59,5 +59,16 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_token"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="token"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="pay"
+        android:textAllCaps="false"/>
 </LinearLayout>
